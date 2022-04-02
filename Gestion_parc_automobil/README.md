@@ -6,4 +6,4 @@
 Après compilation du projet, on vient directement sur la
 page d’authentification
 
-<img src='img/cap1.phg'/>
+<img src='img/cap1.png'/>
