@@ -183,6 +183,9 @@ font-size:16pt; font-weight:600; color:#3425e3;</string>
         </item>
         <item row="2" column="3">
          <widget class="QPushButton" name="RUN_BTN">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color: rgb(102, 85, 85);
 color:rgb(239, 244, 144);
@@ -235,10 +238,13 @@ color: rgb(3, 160, 93);</string>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_6">
+           <widget class="QLabel" name="TIM_Lb">
             <property name="styleSheet">
              <string notr="true">background-color: rgb(191, 182, 182);
-background-color: rgb(191, 182, 182);</string>
+background-color: rgb(191, 182, 182);
+text-align: center;
+font: 70 25pt &quot;DejaVu Serif&quot;;
+</string>
             </property>
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:20pt; font-weight:600;&quot;&gt;00S&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
