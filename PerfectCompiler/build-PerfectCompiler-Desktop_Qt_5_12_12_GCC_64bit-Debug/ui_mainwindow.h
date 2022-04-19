@@ -47,8 +47,8 @@ public:
     QLabel *TIM_Lb;
     QVBoxLayout *verticalLayout;
     QLabel *label_4;
-    QPushButton *SAVE_FILE_BTN;
     QLabel *label_2;
+    QPushButton *SAVE_FILE_BTN;
     QLabel *Title;
     QLabel *label_3;
     QTextEdit *CODE_BRS;
@@ -176,14 +176,6 @@ public:
 
         gridLayout_2->addLayout(verticalLayout, 0, 3, 1, 1);
 
-        SAVE_FILE_BTN = new QPushButton(centralwidget);
-        SAVE_FILE_BTN->setObjectName(QString::fromUtf8("SAVE_FILE_BTN"));
-        SAVE_FILE_BTN->setMinimumSize(QSize(0, 60));
-        SAVE_FILE_BTN->setStyleSheet(QString::fromUtf8("background-color:#CBC1C1;\n"
-"font-size:16pt; font-weight:600; color:#3425e3;"));
-
-        gridLayout_2->addWidget(SAVE_FILE_BTN, 2, 0, 1, 1);
-
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setMaximumSize(QSize(16777215, 80));
@@ -192,6 +184,14 @@ public:
 "padding:10;"));
 
         gridLayout_2->addWidget(label_2, 0, 0, 1, 3);
+
+        SAVE_FILE_BTN = new QPushButton(centralwidget);
+        SAVE_FILE_BTN->setObjectName(QString::fromUtf8("SAVE_FILE_BTN"));
+        SAVE_FILE_BTN->setMinimumSize(QSize(0, 60));
+        SAVE_FILE_BTN->setStyleSheet(QString::fromUtf8("background-color:#CBC1C1;\n"
+"font-size:16pt; font-weight:600; color:#3425e3;"));
+
+        gridLayout_2->addWidget(SAVE_FILE_BTN, 1, 0, 2, 1);
 
 
         horizontalLayout_2->addLayout(gridLayout_2);
@@ -280,8 +280,8 @@ public:
         label_7->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-weight:600; color:#03a05d;\">TIME:</span></p></body></html>", nullptr));
         TIM_Lb->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:20pt; font-weight:600;\">00S</span></p></body></html>", nullptr));
         label_4->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; font-weight:600; color:#1a5fb4;\">LANGAGE</span></p></body></html>", nullptr));
-        SAVE_FILE_BTN->setText(QApplication::translate("MainWindow", "SAVE IN FILE", nullptr));
         label_2->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">TEST DATA</p></body></html>", nullptr));
+        SAVE_FILE_BTN->setText(QApplication::translate("MainWindow", "SAVE IN FILE", nullptr));
 #ifndef QT_NO_TOOLTIP
         Title->setToolTip(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><br/></p></body></html>", nullptr));
 #endif // QT_NO_TOOLTIP
