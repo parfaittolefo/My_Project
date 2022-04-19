@@ -5,14 +5,16 @@
 #include "qfile.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <QTextStream>
+
 int status=0;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //ui->CODE_BRS->setReadOnly(true);
     ui->RUN_BTN->setEnabled(false);
-    ui->CODE_BRS->setReadOnly(false);
 }
 
 MainWindow::~MainWindow()
@@ -33,17 +35,46 @@ void MainWindow::ErrorPrinter(int sts)
 
 }
 
+void MainWindow::PrintResult(void)
+{
+
+    QFile Myfile("/tmp/result.txt");
+    if(Myfile.open(QIODevice::ReadOnly | QIODevice::Text))
+
+    {
+         //ui->INPUT_BRS->clear();
+         while (!Myfile.atEnd())
+         {
+
+             ui->OUTPUT_BRS->append(Myfile.readLine());
+             status=1;
+
+         }
+
+         //Delete result.txt
+             system("rm -r /tmp/result.txt");
+
+    }
+
+     ErrorPrinter(status);
+     status=0;
+}
+
 //Reading of programme data
 
 void MainWindow::on_FILE_BTN_clicked()
 {
     QString file =  QFileDialog::getOpenFileName(this,QDir::currentPath());
+    file_orig = file;
 
     if (!file.isEmpty())
     {
         ui->RUN_BTN->setEnabled(true);
 
-         QFile Myfile(file);
+
+          QProcess::execute("cp "+file_orig+" /tmp/code_file");
+          file="/tmp/code_file";
+          QFile Myfile(file);
         if(Myfile.open(QIODevice::ReadOnly | QIODevice::Text))
 
         {
@@ -55,8 +86,16 @@ void MainWindow::on_FILE_BTN_clicked()
 
                  ui->CODE_BRS->append(Myfile.readLine());
 
+
              }
+             Myfile.close();
         }
+
+        //ui->FILE_BTN->setEnabled(false);
+        ui->CODE_BRS->setReadOnly(false);
+
+
+        QMessageBox::warning(0,"Error",Code_file_name);
 
     }
 
@@ -80,7 +119,8 @@ void MainWindow::on_INPUT_FILE_BTN_clicked()
         if(Myfile.open(QIODevice::ReadOnly | QIODevice::Text))
 
         {
-               ui->INPUT_BRS->clear();
+            input_file=Myfile.fileName();
+            ui->INPUT_BRS->clear();
              while (!Myfile.atEnd())
              {
 
@@ -90,32 +130,10 @@ void MainWindow::on_INPUT_FILE_BTN_clicked()
 
         }
 
-
     }
 
     else
     {QMessageBox::warning(0,"Error","The file is empty !");}
-
-}
-
-//Reading of standar input
-void MainWindow::on_INPUT_BTN_clicked()
-{
-    ui->INPUT_BRS->clear();
-    //QString input;
-    Input_widget = new QWidget();
-    okbtn = new QPushButton();
-    okbtn->setText("Ok");
-    Standart_input= new QPlainTextEdit();
-    Standart_input->setFixedHeight(300);
-    Standart_input->setFixedWidth(600);
-    QGridLayout* Input_Grid = new QGridLayout(Input_widget);
-    Input_Grid->addWidget(Standart_input,0,0,2,5);
-    Input_Grid->addWidget(okbtn,2,2,1,1);
-    Input_widget->setFixedHeight(350);
-    Input_widget->setFixedWidth(650);
-    Input_widget->show();
-   connect(okbtn,SIGNAL(clicked()),this,SLOT(okbtn_clicked()));
 
 }
 
@@ -141,120 +159,81 @@ void MainWindow::on_RUN_BTN_clicked()
     if(langage=="C")
     {
         //Program compilation
-            QProcess::execute("gcc "+Code_file_name+" -o compile_code");
+        QProcess::execute("cp "+file_orig+" /tmp/code_file");
+        system("mv /tmp/code_file /tmp/code_file.c");
+         QProcess::execute("gcc /tmp/code_file.c -o /tmp/compile_code");
 
         //chmod +x compile_code
-            system("chmod +x compile_code");
+            system("chmod +x /tmp/compile_code");
+
+              system("echo '' /tmp/result.txt> ");
 
             // start time
             QTime myTimer;
             myTimer.start();
 
             //Program execution
-           system("./compile_code > result.txt");
+           system("cat /tmp/input.txt | /tmp/compile_code >> /tmp/result.txt 2>> /tmp/result.txt");
+           int time = myTimer.elapsed();
 
+           //print output
+            PrintResult();
            // time of running
-          int time = myTimer.elapsed();
+
+          QString s = QString::number(time);
+          ui->TIM_Lb->setAlignment(Qt::AlignCenter);
+          ui->TIM_Lb->setText(s+" ms");
 
        //Delete binary file
-           system("rm -r compile_code");
-
-       QFile Myfile("result.txt");
-       if(Myfile.open(QIODevice::ReadOnly | QIODevice::Text))
-
-       {
-            ui->INPUT_BRS->clear();
-            while (!Myfile.atEnd())
-            {
-                ui->OUTPUT_BRS->clear();
-                ui->OUTPUT_BRS->append(Myfile.readLine());
-                status=1;
-
-            }
-
-            QString s = QString::number(time);
-            ui->TIM_Lb->setAlignment(Qt::AlignCenter);
-            ui->TIM_Lb->setText(s+" ms");
-
-            //Delete result.txt
-                system("rm -r result.txt");
-
-       }
-
-        ErrorPrinter(status);
-        status=0;
+           system("rm -r /tmp/compile_code");
 
     }
 
     if(langage=="C++")
     {
         //Program compilation
-            QProcess::execute("g++ "+Code_file_name+" -o compile_code");
+        QProcess::execute("cp "+file_orig+" /tmp/code_file");
+        system("mv /tmp/code_file /tmp/code_file.cpp");
+            QProcess::execute("g++ /tmp/code_file.cpp -o /tmp/compile_code");
 
         //chmod +x compile_code
-            system("chmod +x compile_code");
+            system("chmod +x /tmp/compile_code");
 
             // start time
+            system("echo '' /tmp/result.txt> ");
             QTime myTimer;
             myTimer.start();
 
 
         //Program execution
-           system("./compile_code > result.txt");
+           system("cat /tmp/input.txt | /tmp/compile_code >> /tmp/result.txt 2>> /tmp/result.txt");
 
            // time of running
           int time = myTimer.elapsed();
 
        //Delete binary file
-           system("rm -r compile_code");
+           system("rm -r /tmp/compile_code");
 
-       QFile Myfile("result.txt");
-       if(Myfile.open(QIODevice::ReadOnly | QIODevice::Text))
-
-       {
-            ui->INPUT_BRS->clear();
-            while (!Myfile.atEnd())
-            {
-                ui->OUTPUT_BRS->append(Myfile.readLine());
-                status=1;
-
-            }
-
-            //Delete result.txt
-                system("rm -r result.txt");
+           PrintResult();
                 QString s = QString::number(time);
                 ui->TIM_Lb->setAlignment(Qt::AlignCenter);
                 ui->TIM_Lb->setText(s+" ms");
-
-       }
-
-        ErrorPrinter(status);
-        status=0;
 
     }
 
     if(langage=="python2")
     {
-        QProcess p;
-        QStringList params;
-        params << Code_file_name ;
-
         // start time
         QTime myTimer;
         myTimer.start();
-
-        p.start("/usr/bin/python2",params);
+        QProcess::execute("cp "+file_orig+" /tmp/code_file");
+        system("echo '' /tmp/result.txt> ");
+         system("cat /tmp/input.txt | python2 /tmp/code_file >> /tmp/result.txt 2>> /tmp/result.txt");
 
         // time of running
-       int time = myTimer.elapsed();
-        p.waitForFinished(-1);
+         int time = myTimer.elapsed();
 
-
-
-        QString p_stdout = p.readAll();
-        ui->OUTPUT_BRS->clear();
-
-        ui->OUTPUT_BRS->append(p_stdout);
+        PrintResult();
 
         QString s = QString::number(time);
         ui->TIM_Lb->setAlignment(Qt::AlignCenter);
@@ -264,31 +243,63 @@ void MainWindow::on_RUN_BTN_clicked()
     if(langage=="python3")
     {
 
-        QProcess p;
-        QStringList params;
-        params << Code_file_name ;
 
         // start time
         QTime myTimer;
         myTimer.start();
 
-        p.start("/usr/bin/python3",params);
+        //execution
+
+        system("echo '' /tmp/result.txt> ");
+        system("cat /tmp/input.txt | python3 /tmp/code_file >> /tmp/result.txt 2>> /tmp/result.txt ");
+
         // time of running
        int time = myTimer.elapsed();
-        p.waitForFinished(-1);
 
-
-
-        QString p_stdout = p.readAll();
-        ui->OUTPUT_BRS->clear();
-        ui->OUTPUT_BRS->append(p_stdout);
+        PrintResult();
 
         QString s = QString::number(time);
         ui->TIM_Lb->setAlignment(Qt::AlignCenter);
         ui->TIM_Lb->setText(s+" ms");
 
-
-
     }
+}
+
+
+void MainWindow::on_INPUT_BRS_textChanged()
+{
+    system("echo '' > /tmp/input.txt ");
+    QFile file("/tmp/input.txt" );
+    if ( file.open(QIODevice::ReadWrite) )
+    {
+        QTextStream stream( &file );
+        stream << ui->INPUT_BRS->toPlainText();
+    }
+    file.close();
+
+}
+
+void MainWindow::on_SAVE_BTN_clicked()
+{
+    system("echo '' > /tmp/code_file ");
+    QFile file( Code_file_name );
+    if ( file.open(QIODevice::ReadWrite) )
+    {
+        QTextStream stream( &file );
+        stream << ui->CODE_BRS->toPlainText();
+    }
+    file.close();
+}
+
+
+void MainWindow::on_SAVE_FILE_BTN_clicked()
+{
+    QFile file( file_orig );
+    if ( file.open(QIODevice::ReadWrite) )
+    {
+        QTextStream stream( &file );
+        stream << ui->CODE_BRS->toPlainText();
+    }
+    file.close();
 }
 

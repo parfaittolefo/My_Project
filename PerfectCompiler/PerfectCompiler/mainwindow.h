@@ -15,11 +15,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     QPushButton* okbtn;
-    QString input;
-    QString Code_file_name,cmd;
+    QString input,file_orig;
+    QString Code_file_name,input_file,compile_file,copie_file;
     QPlainTextEdit* Standart_input;
     QWidget* Input_widget;
     void ErrorPrinter(int sts);
+    void PrintResult(void);
 
 private slots:
     void on_FILE_BTN_clicked();
@@ -31,6 +32,12 @@ private slots:
     void okbtn_clicked();
 
     void on_RUN_BTN_clicked();
+
+    void on_INPUT_BRS_textChanged();
+
+    void on_SAVE_BTN_clicked();
+
+    void on_SAVE_FILE_BTN_clicked();
 
 private:
     Ui::MainWindow *ui;
