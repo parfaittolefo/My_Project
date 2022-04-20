@@ -16,7 +16,7 @@ Il est constitué de quatres parties.
 
 # Première partie
 
-<img src='img/1.png'>
+<img src='img/01.png'>
 
 Cette partie est constituée d'une Première grande bande mentionnant le nom du logiciel, en suite des boutonts permettant d'interagir avec celui ci.
 
@@ -44,7 +44,7 @@ C'est la partie d'affichage de la sortie de votre programme
 # Vue générale
 
 
-<img src='img/5.png'>
+<img src='img/05.png'>
 
 
 # NB:
