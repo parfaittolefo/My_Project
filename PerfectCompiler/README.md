@@ -1,17 +1,17 @@
-#INSTALLATION
+# INSTALLATION
 
 `apt-get install python2 && apt-get install python3 && apt-get install gcc && apt-get install g++`
 
 
 **Téléchargé ici:** [PerfectCompiler](https://github.com/parfaittolefo/QT-Project/raw/main/PerfectCompiler/build-mainwindow-Desktop_Qt_5_12_12_GCC_64bit-Debug/mainwindow)
 
-#Si votre système est en français :
+# Si votre système est en français :
 
 `cd ~/Téléchargements && mv mainwindow PerfectCompiler && sudo mv PerfectCompiler /usr/local/bin/`
 
 **PerfectCompiler** vient de s'installer.
 
-#Si votre système est en anglais :
+# Si votre système est en anglais :
 
 `cd ~/Downloads && mv mainwindow PerfectCompiler && sudo mv PerfectCompiler /usr/local/bin/`
 
@@ -21,7 +21,7 @@ Vous pouvez le démarrer en tapant dans votre terminal `PerfectCompiler`
 
 
 
-#Introduction
+# Introduction
 
 J'ai pensé à développer un tel logiciel en raison des difficultés de compilation des programmes sous linux. Surtout quand on est débutant !!!
 
