@@ -18,7 +18,7 @@ Il est constitué de quatres parties.
 
 <img src='img/1.png'>
 
-Cette partie est constituée d'une Première grande bande mentionnant le nom du logiciel, en suite des boutonts permettant d'interagir avec le logiciel.
+Cette partie est constituée d'une Première grande bande mentionnant le nom du logiciel, en suite des boutonts permettant d'interagir avec celui ci.
 
 # Deuxième partie
 
