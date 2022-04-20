@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     //ui->CODE_BRS->setReadOnly(true);
     ui->RUN_BTN->setEnabled(false);
+    QWidget::setWindowTitle("PerfectCompiler");
 }
 
 MainWindow::~MainWindow()
@@ -38,19 +39,11 @@ void MainWindow::ErrorPrinter(int sts)
 
 void MainWindow::PrintResult(void)
 {
-    QString line;
+
     QFile Myfile("/tmp/result.txt");
     if(Myfile.open(QIODevice::ReadOnly | QIODevice::Text))
 
     {
-//        line=Myfile.readLine();
-//        std::string text = line.toLocal8Bit().constData();
-//        if(qstrcmp("tex","sh: 1: /tmp/compile_code: not found")==0)
-//        {
-//           ui->OUTPUT_BRS->append("Langage error !!!");
-//           exit(1);
-//        }
-         //ui->INPUT_BRS->clear();
          while (!Myfile.atEnd())
          {
 
@@ -157,7 +150,7 @@ void MainWindow::okbtn_clicked()
 void MainWindow::on_RUN_BTN_clicked()
 {
     ui->OUTPUT_BRS->clear();
-    QString langage, code_source;
+    QString langage;
     langage= ui->LANGAGE_CMX->currentText();
 
    // QMessageBox::information(0,"Langage choice","You are going to run your code in "+langage);
@@ -167,14 +160,13 @@ void MainWindow::on_RUN_BTN_clicked()
     if(langage=="C")
     {
         //Program compilation
-        QProcess::execute("cp "+file_orig+" /tmp/code_file");
-        system("mv /tmp/code_file /tmp/code_file.c");
+        system("cp /tmp/code_file /tmp/code_file.c");
          QProcess::execute("gcc /tmp/code_file.c -o /tmp/compile_code");
 
         //chmod +x compile_code
             system("chmod +x /tmp/compile_code");
 
-              system("echo '' /tmp/result.txt> ");
+              system("echo '' > /tmp/result.txt> ");
 
             // start time
             QTime myTimer;
@@ -200,15 +192,14 @@ void MainWindow::on_RUN_BTN_clicked()
     if(langage=="C++")
     {
         //Program compilation
-        QProcess::execute("cp "+file_orig+" /tmp/code_file");
-        system("mv /tmp/code_file /tmp/code_file.cpp");
-            QProcess::execute("g++ /tmp/code_file.cpp -o /tmp/compile_code");
+        QProcess::execute("cp /tmp/code_file /tmp/code_file.cpp");
+        QProcess::execute("g++ /tmp/code_file.cpp -o /tmp/compile_code");
 
         //chmod +x compile_code
             system("chmod +x /tmp/compile_code");
 
             // start time
-            system("echo '' /tmp/result.txt> ");
+            system("echo '' > /tmp/result.txt> ");
             QTime myTimer;
             myTimer.start();
 
@@ -231,9 +222,7 @@ void MainWindow::on_RUN_BTN_clicked()
 
     if(langage=="python2")
     {
-
-        QProcess::execute("cp "+file_orig+" /tmp/code_file");
-        system("echo '' /tmp/result.txt> ");
+        system("echo '' > /tmp/result.txt ");
 
         // start time
         QTime myTimer;
@@ -253,8 +242,7 @@ void MainWindow::on_RUN_BTN_clicked()
     if(langage=="python3")
     {
 
-        QProcess::execute("cp "+file_orig+" /tmp/code_file");
-        system("echo '' /tmp/result.txt> ");
+        system("echo '' > /tmp/result.txt> ");
 
         // start time
         QTime myTimer;

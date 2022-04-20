@@ -27,8 +27,6 @@ private slots:
 
     void on_INPUT_FILE_BTN_clicked();
 
-    void on_INPUT_BTN_clicked();
-
     void okbtn_clicked();
 
     void on_RUN_BTN_clicked();
