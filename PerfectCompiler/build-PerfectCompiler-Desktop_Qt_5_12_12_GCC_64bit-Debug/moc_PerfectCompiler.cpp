@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'mainwindow.h'
+** Meta object code from reading C++ file 'PerfectCompiler.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.12)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../PerfectCompiler/mainwindow.h"
+#include "../PerfectCompiler/PerfectCompiler.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'mainwindow.h' doesn't include <QObject>."
+#error "The header file 'PerfectCompiler.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.12.12. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,36 +20,36 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_MainWindow_t {
+struct qt_meta_stringdata_PerfectCompiler_t {
     QByteArrayData data[9];
-    char stringdata0[161];
+    char stringdata0[166];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_MainWindow_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_PerfectCompiler_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
+static const qt_meta_stringdata_PerfectCompiler_t qt_meta_stringdata_PerfectCompiler = {
     {
-QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 19), // "on_FILE_BTN_clicked"
-QT_MOC_LITERAL(2, 31, 0), // ""
-QT_MOC_LITERAL(3, 32, 25), // "on_INPUT_FILE_BTN_clicked"
-QT_MOC_LITERAL(4, 58, 13), // "okbtn_clicked"
-QT_MOC_LITERAL(5, 72, 18), // "on_RUN_BTN_clicked"
-QT_MOC_LITERAL(6, 91, 24), // "on_INPUT_BRS_textChanged"
-QT_MOC_LITERAL(7, 116, 19), // "on_SAVE_BTN_clicked"
-QT_MOC_LITERAL(8, 136, 24) // "on_SAVE_FILE_BTN_clicked"
+QT_MOC_LITERAL(0, 0, 15), // "PerfectCompiler"
+QT_MOC_LITERAL(1, 16, 19), // "on_FILE_BTN_clicked"
+QT_MOC_LITERAL(2, 36, 0), // ""
+QT_MOC_LITERAL(3, 37, 25), // "on_INPUT_FILE_BTN_clicked"
+QT_MOC_LITERAL(4, 63, 13), // "okbtn_clicked"
+QT_MOC_LITERAL(5, 77, 18), // "on_RUN_BTN_clicked"
+QT_MOC_LITERAL(6, 96, 24), // "on_INPUT_BRS_textChanged"
+QT_MOC_LITERAL(7, 121, 19), // "on_SAVE_BTN_clicked"
+QT_MOC_LITERAL(8, 141, 24) // "on_SAVE_FILE_BTN_clicked"
 
     },
-    "MainWindow\0on_FILE_BTN_clicked\0\0"
-    "on_INPUT_FILE_BTN_clicked\0okbtn_clicked\0"
+    "PerfectCompiler\0on_FILE_BTN_clicked\0"
+    "\0on_INPUT_FILE_BTN_clicked\0okbtn_clicked\0"
     "on_RUN_BTN_clicked\0on_INPUT_BRS_textChanged\0"
     "on_SAVE_BTN_clicked\0on_SAVE_FILE_BTN_clicked"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_MainWindow[] = {
+static const uint qt_meta_data_PerfectCompiler[] = {
 
  // content:
        8,       // revision
@@ -83,10 +83,10 @@ static const uint qt_meta_data_MainWindow[] = {
        0        // eod
 };
 
-void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void PerfectCompiler::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<MainWindow *>(_o);
+        auto *_t = static_cast<PerfectCompiler *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->on_FILE_BTN_clicked(); break;
@@ -102,30 +102,30 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject MainWindow::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject PerfectCompiler::staticMetaObject = { {
     &QMainWindow::staticMetaObject,
-    qt_meta_stringdata_MainWindow.data,
-    qt_meta_data_MainWindow,
+    qt_meta_stringdata_PerfectCompiler.data,
+    qt_meta_data_PerfectCompiler,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *MainWindow::metaObject() const
+const QMetaObject *PerfectCompiler::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *MainWindow::qt_metacast(const char *_clname)
+void *PerfectCompiler::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_MainWindow.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_PerfectCompiler.stringdata0))
         return static_cast<void*>(this);
     return QMainWindow::qt_metacast(_clname);
 }
 
-int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int PerfectCompiler::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
